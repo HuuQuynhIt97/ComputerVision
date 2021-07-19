@@ -1,0 +1,15 @@
+.vtimeline li {
+  padding: 8px 0px 8px 24px;
+  list-style: none;
+  background: transparent url(../../../../assets/img/logo/bullet.png) no-repeat -6px 9px;
+}
+
+.vtimeline .tltitle {
+  padding-left: 12px;
+  /* width: 301px; */
+  padding-bottom: 4px;
+}
+.vtimeline .tltitle i {
+  color: #727139;
+  padding-right: 8px;
+}

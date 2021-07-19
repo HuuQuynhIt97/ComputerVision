@@ -1,0 +1,98 @@
+<ngx-spinner [fullScreen]="true" type="square-jelly-box" size="medium">
+  <p class="loading">Loading data...</p>
+</ngx-spinner>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body table-responsive p-0">
+        <ejs-grid
+          #grid
+          [dataSource]="planData"
+          allowPaging="true"
+          gridLines="Both"
+          [toolbar]="toolbarAccount"
+          [pageSettings]="pageSettings"
+          allowExcelExport="true"
+          (toolbarClick)="toolbarClick($event)"
+          [editSettings]="editSettings"
+        >
+          <e-columns>
+
+            <e-column field="car_Name" textAlign="Center"  headerText="Car"> </e-column>
+
+            <e-column field="line_Name" headerText="Camera" textAlign="Center"> </e-column>
+
+            <e-column field="dueDate" textAlign="Center"  isPrimaryKey="true" headerText="Date">
+              <ng-template #template let-data>
+                {{data.dueDate | date: 'yyyy-MM-dd'}}
+              </ng-template>
+            </e-column>
+
+            <e-column field="amount" textAlign="Center"  headerText="Box Count">
+              <ng-template #template let-data>
+                <!-- <input style="font-weight: bold; color: red;" [(ngModel)]="count" type="text"> -->
+                <h1 style="font-weight: bold; color: red;">{{data.amount}}</h1>
+              </ng-template>
+
+            </e-column>
+
+            <e-column field="Status" isPrimaryKey="true" textAlign="Center" headerText="Action" >
+
+              <ng-template #template let-data>
+                <ng-container *ngIf="data.isStart === false; else elseTemplate">
+                  <button type="button" (click)="start(data)" class="btn btn-pill btn-sm btn-block btn-info">
+                    <i class="fa fa-play" aria-hidden="true"></i> Start</button>
+                </ng-container>
+                <ng-template #elseTemplate>
+                  <button type="button" (click)="stop(data)" class="btn btn-pill btn-sm btn-block btn-danger"><i class="fa fa-stop" aria-hidden="true"></i> Stop</button>
+                </ng-template>
+
+              </ng-template>
+
+              <ng-template #editTemplate let-data>
+                <span></span>
+              </ng-template>
+
+            </e-column>
+          </e-columns>
+
+        </ejs-grid>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body table-responsive p-0">
+        <ejs-grid
+          #gridTotal
+          [dataSource]="planDataCount"
+          allowPaging="true"
+          gridLines="Both"
+          [toolbar]="toolbarCarTotal"
+          [pageSettings]="pageSettings"
+          (toolbarClick)="toolbarClick($event)"
+          [editSettings]="editSettings"
+        >
+          <e-columns>
+
+            <e-column field="car" textAlign="Center"  headerText="Car"> </e-column>
+
+            <e-column field="amount" textAlign="Center"  headerText="Box Total">
+              <ng-template #template let-data>
+                <!-- <input style="font-weight: bold; color: red;" [(ngModel)]="count" type="text"> -->
+                <h1 style="font-weight: bold; color: red;">{{data.amount}}</h1>
+              </ng-template>
+
+            </e-column>
+
+          </e-columns>
+
+        </ejs-grid>
+      </div>
+    </div>
+  </div>
+</div>
